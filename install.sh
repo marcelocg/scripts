@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [ ! "$(id -u)" -eq 0 ] ;then
+  echo "Please run this script with sudo:"
+  echo "sudo $0 $*"
+  exit 1
+fi
+
 echo -n "Are you behind a proxy (y/n)? "
 old_stty_cfg=$(stty -g)
 stty raw -echo
@@ -22,9 +28,9 @@ if [ "$behind_proxy" != "${behind_proxy#[Yy]}" ] ;then
       proxy_ip="192.168.56.1"
     fi
     stty $old_stty_cfg
-    echo "\n\r$proxy_ip"
-    #sudo export https_proxy=http://$proxy_ip:3128 >> /etc/profile
-    #sudo export http_proxy=http://$proxy_ip:3128 >> /etc/profile
+    echo "\n\rDefining global proxy IP as $proxy_ip"
+    echo "export http_proxy=http://$proxy_ip:3128" >> /etc/profile
+    echo "export https_proxy=http://$proxy_ip:3128" >> /etc/profile
   else # not a VM
     # next version will ask for an IP address to set as proxy
     stty $old_stty_cfg
