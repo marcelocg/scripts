@@ -105,6 +105,10 @@ fi
 
 ## Install terminal stuff
 sudo apt install -y tmux zsh silversearcher-ag fonts-powerline
+
 ## Download tmux dotfile
-curl https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf -x https://$proxy_ip:$proxy_port -o ~/.tmux.conf
-###### TODO - Do we always need proxy? NO!
+curl_proxy=
+if [ "$proxy_ip" ]; then
+  curl_proxy="-x https://$proxy_ip:$proxy_port"
+fi
+curl https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf $curl_proxy #-o ~/.tmux.conf
