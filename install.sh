@@ -86,14 +86,14 @@ fi
 
 if [ "$vbox" ]; then
   # Get the necessary permissions to read from/write to shared folders
-  sudo adduser $(logname) vboxsf
+  adduser $(logname) vboxsf
 fi
 
 # Update everything
-#sudo apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
+# apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install development basic stuff
-#sudo apt install build-essential git -y
+# apt install build-essential git -y
 
 if [ "$proxy_ip" ]; then
   # Proxy for Git
@@ -104,7 +104,7 @@ fi
 # Terminal
 
 ## Install terminal stuff
-sudo apt install -y tmux zsh silversearcher-ag fonts-powerline
+apt install -y tmux zsh silversearcher-ag fonts-powerline
 
 ## Download tmux dotfile
 curl_proxy=
