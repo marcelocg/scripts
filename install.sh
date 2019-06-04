@@ -19,6 +19,7 @@ if [ ! "$(id -u)" -eq 0 ] ;then
   die "Please run this script with: \$ sudo $0 $*"
 fi
 
+user_home="/home/$(logname)"
 proxy_ip=
 proxy_port="3128"
 vbox=
@@ -111,8 +112,8 @@ curl_proxy=
 if [ "$proxy_ip" ]; then
   curl_proxy="-x https://$proxy_ip:$proxy_port"
 fi
-curl https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf $curl_proxy -o /home/$(logname)/.tmux.conf
-chown $(logname):$(logname) /home/$(logname)/.tmux.conf
+curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf $curl_proxy -o $user_home/.tmux.conf
+chown $(logname):$(logname) $user_home/.tmux.conf
 
 ## Config the shell
 chsh -s $(which zsh) $(logname)
