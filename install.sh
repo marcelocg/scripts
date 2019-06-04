@@ -81,3 +81,12 @@ fi
 
 # Update everything
 sudo apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
+
+# Install development basic stuff
+sudo apt install build-essential git -y
+
+if [ "$proxy_ip" ]; then
+  # Proxy for Git
+  git config --global http.proxy http://$proxy_ip:$proxy_port
+  git config --global https.proxy https://$proxy_ip:$proxy_port
+fi
