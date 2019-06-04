@@ -84,6 +84,11 @@ if [ "$proxy_ip" ]; then
   echo "Acquire::https::Proxy \"https://$proxy_ip:$proxy_port\";" >> /etc/apt/apt.conf
 fi
 
+if [ "$vbox" ]; then
+  # Get the necessary permissions to read from/write to shared folders
+  sudo adduser $(logname) vboxsf
+fi
+
 # Update everything
 sudo apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
@@ -94,9 +99,4 @@ if [ "$proxy_ip" ]; then
   # Proxy for Git
   git config --global http.proxy http://$proxy_ip:$proxy_port
   git config --global https.proxy https://$proxy_ip:$proxy_port
-fi
-
-if [ "$vbox" ]; then
-  # Get the necessary permissions to read from/write to shared folders
-  sudo adduser $(logname) vboxsf
 fi
