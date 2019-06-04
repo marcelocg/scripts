@@ -112,3 +112,6 @@ if [ "$proxy_ip" ]; then
   curl_proxy="-x https://$proxy_ip:$proxy_port"
 fi
 curl https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf $curl_proxy #-o ~/.tmux.conf
+
+## Config the shell
+chsh -s $(which zsh) $(logname)
