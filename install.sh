@@ -9,8 +9,9 @@ die() {
 show_help() {
   printf '%s\n'   "Installs MCG's most used apps and configs for development purposes."
   printf '%s\n\n' "Usage: sudo ./install.sh [OPTION]..."
-  printf '%s\n'   "  -p,  --proxy IP     IP address of the proxy server"
-  printf '%s\n\n'   "       --port  PORT   Port number used by the proxy server. Defaults to 3128."
+  printf '%s\n'   "  -p,  --proxy IP     IP address of the proxy server."
+  printf '%s\n'   "       --port  PORT   Port number used by the proxy server. Defaults to 3128."
+  printf '%s\n\n' "       --vbox         Indicate this is a virtual machine running in VirtuaBox."
 }
 
 if [ ! "$(id -u)" -eq 0 ] ;then
@@ -20,6 +21,7 @@ fi
 
 proxy_ip=
 proxy_port="3128"
+vbox=
 
 while :; do
   case $1 in
@@ -55,6 +57,9 @@ while :; do
     --port=)                 # Handle the case of an empty --port=
         die 'ERROR: "--port" requires a non-empty option argument.'
         ;;
+    --vbox)
+        vbox=1
+        ;;
     --)                      # End of all options.
         shift
         break
@@ -89,4 +94,9 @@ if [ "$proxy_ip" ]; then
   # Proxy for Git
   git config --global http.proxy http://$proxy_ip:$proxy_port
   git config --global https.proxy https://$proxy_ip:$proxy_port
+fi
+
+if [ "$vbox" ]; then
+  # Get the necessary permissions to read from/write to shared folders
+  sudo adduser $(logname) vboxsf
 fi
