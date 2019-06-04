@@ -70,8 +70,13 @@ while :; do
 done
 
 if [ "$proxy_ip" ]; then
-  echo "export http_proxy=http://$proxy_ip:$proxy_port" >> /etc/profile
+  # Global proxy
+  echo "export http_proxy=http://$proxy_ip:$proxy_port"   >> /etc/profile
   echo "export https_proxy=https://$proxy_ip:$proxy_port" >> /etc/profile
+
+  # Proxy for apt
+  echo "Acquire::http::Proxy \"http://$proxy_ip:$proxy_port\";"   >> /etc/apt/apt.conf
+  echo "Acquire::https::Proxy \"https://$proxy_ip:$proxy_port\";" >> /etc/apt/apt.conf
 else
   echo "No proxy."
 fi
