@@ -90,13 +90,21 @@ if [ "$vbox" ]; then
 fi
 
 # Update everything
-sudo apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
+#sudo apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install development basic stuff
-sudo apt install build-essential git -y
+#sudo apt install build-essential git -y
 
 if [ "$proxy_ip" ]; then
   # Proxy for Git
   git config --global http.proxy http://$proxy_ip:$proxy_port
   git config --global https.proxy https://$proxy_ip:$proxy_port
 fi
+
+# Terminal
+
+## Install terminal stuff
+sudo apt install -y tmux zsh silversearcher-ag fonts-powerline
+## Download tmux dotfile
+curl https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf -x https://$proxy_ip:$proxy_port -o ~/.tmux.conf
+###### TODO - Do we always need proxy? NO!
