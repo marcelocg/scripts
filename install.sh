@@ -77,6 +77,7 @@ if [ "$proxy_ip" ]; then
   # Proxy for apt
   echo "Acquire::http::Proxy \"http://$proxy_ip:$proxy_port\";"   >> /etc/apt/apt.conf
   echo "Acquire::https::Proxy \"https://$proxy_ip:$proxy_port\";" >> /etc/apt/apt.conf
-else
-  echo "No proxy."
 fi
+
+# Update everything
+sudo apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
