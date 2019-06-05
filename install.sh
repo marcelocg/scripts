@@ -91,10 +91,10 @@ if [ "$vbox" ]; then
 fi
 
 # Update everything
-# apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
+apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install development basic stuff
-# apt install build-essential git -y
+apt install build-essential git -y
 
 if [ "$proxy_ip" ]; then
   # Proxy for Git
@@ -109,9 +109,11 @@ apt install -y tmux zsh silversearcher-ag fonts-powerline fortune
 
 ## Download tmux dotfile
 curl_proxy=
+
 if [ "$proxy_ip" ]; then
   curl_proxy="-x https://$proxy_ip:$proxy_port"
 fi
+
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf $curl_proxy -o $user_home/.tmux.conf
 chown $(logname):$(logname) $user_home/.tmux.conf
 
@@ -119,7 +121,9 @@ chown $(logname):$(logname) $user_home/.tmux.conf
 chsh -s $(which zsh) $(logname)
 
 ### Installs Oh My ZSH
-su - $(logname) sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh $curl_proxy -o install_oh-my-zsh.sh
+su - $(logname) sh install_oh-my-zsh.sh --unattended # unattended avoids running zsh after script ends
+rm -f install_oh-my-zsh.sh
 
 CUSTOM_ZSH_DIR="$user_home/.oh-my-zsh/custom"
 
