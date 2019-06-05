@@ -130,5 +130,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $CUSTOM_ZSH_D
 ln -s $CUSTOM_ZSH_DIR/themes/spaceship-prompt/spaceship.zsh-theme $CUSTOM_ZSH_DIR/themes/spaceship.zsh-theme
 
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.zshrc $curl_proxy -o $user_home/.zshrc
+curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.aliases $curl_proxy -o $user_home/.aliases
 
 chown -R $(logname):$(logname) $user_home
