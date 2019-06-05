@@ -105,7 +105,7 @@ fi
 # Terminal
 
 ## Install terminal stuff
-apt install -y tmux zsh silversearcher-ag fonts-powerline
+apt install -y tmux zsh silversearcher-ag fonts-powerline fortune
 
 ## Download tmux dotfile
 curl_proxy=
