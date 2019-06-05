@@ -133,3 +133,6 @@ curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.zshrc $c
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.aliases $curl_proxy -o $user_home/.aliases
 
 chown -R $(logname):$(logname) $user_home
+
+# Now things start to get serious
+snap install --classic code
