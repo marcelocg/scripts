@@ -123,9 +123,11 @@ chown $(logname):$(logname) $user_home/.tmux.conf
 chsh -s $(which zsh) $(logname)
 
 ### Installs Oh My ZSH
-curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh $curl_proxy -o install_oh-my-zsh.sh
-su - $(logname) sh install_oh-my-zsh.sh --unattended # unattended avoids running zsh after script ends
-rm -f install_oh-my-zsh.sh
+curl -fL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh $curl_proxy -o $user_home/install_oh-my-zsh.sh
+chown $(logname):$(logname) $user_home/install_oh-my-zsh.sh
+chmod +x $user_home/install_oh-my-zsh.sh
+su - $(logname) -c "./install_oh-my-zsh.sh --unattended" # unattended avoids running zsh after script ends
+rm -f $user_home/install_oh-my-zsh.sh
 
 CUSTOM_ZSH_DIR="$user_home/.oh-my-zsh/custom"
 
