@@ -75,14 +75,16 @@ while :; do
   shift
 done
 
+proxy_address=
 if [ "$proxy_ip" ]; then
+  proxy_address="http://$proxy_ip:$proxy_port"
   # Global proxy
-  echo "export http_proxy=http://$proxy_ip:$proxy_port"   >> /etc/profile
-  echo "export https_proxy=https://$proxy_ip:$proxy_port" >> /etc/profile
+  echo "export http_proxy=$proxy_address"   >> /etc/profile
+  echo "export https_proxy=$proxy_address" >> /etc/profile
 
   # Proxy for apt
-  echo "Acquire::http::Proxy \"http://$proxy_ip:$proxy_port\";"   >> /etc/apt/apt.conf
-  echo "Acquire::https::Proxy \"https://$proxy_ip:$proxy_port\";" >> /etc/apt/apt.conf
+  echo "Acquire::http::Proxy \"$proxy_address\";"   >> /etc/apt/apt.conf
+  echo "Acquire::https::Proxy \"$proxy_address\";" >> /etc/apt/apt.conf
 fi
 
 if [ "$vbox" ]; then
@@ -98,8 +100,8 @@ apt install build-essential git -y
 
 if [ "$proxy_ip" ]; then
   # Proxy for Git
-  git config --global http.proxy http://$proxy_ip:$proxy_port
-  git config --global https.proxy https://$proxy_ip:$proxy_port
+  git config --global http.proxy $proxy_address
+  git config --global https.proxy $proxy_address
 fi
 
 # Terminal
@@ -111,7 +113,7 @@ apt install -y tmux zsh silversearcher-ag fonts-powerline fortune
 curl_proxy=
 
 if [ "$proxy_ip" ]; then
-  curl_proxy="-x https://$proxy_ip:$proxy_port"
+  curl_proxy="-x $proxy_address"
 fi
 
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf $curl_proxy -o $user_home/.tmux.conf
