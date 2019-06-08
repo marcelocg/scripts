@@ -119,10 +119,13 @@ fi
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf $curl_proxy -o $user_home/.tmux.conf
 chown $(logname):$(logname) $user_home/.tmux.conf
 
+# Install tmux plugin manaeger
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 ## Config user default shell
 chsh -s $(which zsh) $(logname)
 
-### Installs Oh My ZSH
+### Install Oh My ZSH
 curl -fL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh $curl_proxy -o $user_home/install_oh-my-zsh.sh
 chown $(logname):$(logname) $user_home/install_oh-my-zsh.sh
 chmod +x $user_home/install_oh-my-zsh.sh
