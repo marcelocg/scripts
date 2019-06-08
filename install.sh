@@ -143,4 +143,8 @@ curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.aliases 
 chown -R $(logname):$(logname) $user_home
 
 # Now things start to get serious
+if [ "$proxy_address" ]; then
+  snap set system proxy.http=$proxy_address
+  snap set system proxy.https=$proxy_address
+fi
 snap install --classic code
