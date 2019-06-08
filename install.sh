@@ -98,7 +98,7 @@ apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && s
 # Install development basic stuff
 apt install build-essential git -y
 
-if [ "$proxy_ip" ]; then
+if [ "$proxy_address" ]; then
   # Proxy for Git
   git config --global http.proxy $proxy_address
   git config --global https.proxy $proxy_address
@@ -112,7 +112,7 @@ apt install -y tmux zsh silversearcher-ag fonts-powerline fortune
 ## Download tmux dotfile
 curl_proxy=
 
-if [ "$proxy_ip" ]; then
+if [ "$proxy_address" ]; then
   curl_proxy="-x $proxy_address"
 fi
 
