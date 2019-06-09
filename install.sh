@@ -146,8 +146,25 @@ curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.aliases 
 chown -R $(logname):$(logname) $user_home
 
 # Now things start to get serious
+
+## Install VSCode
 if [ "$proxy_address" ]; then
   snap set system proxy.http=$proxy_address
   snap set system proxy.https=$proxy_address
 fi
 snap install --classic code
+
+## Install Node
+curl -fsSL https://deb.nodesource.com/setup_12.x $curl_proxy -o $user_home/install_node_12.sh
+chmod +x $user_home/install_node_12.sh
+bash $user_home/install_node_12.sh
+apt install -y nodejs
+rm -f $user_home/install_node_12.sh
+
+mkdir $user_home/.npm-global
+chown $(logname):$(logname) $user_home/.npm-global
+npm config set prefix '$user_home/.npm-global'
+echo "export PATH=$user_home/.npm-global/bin:$PATH" >> $user_home/.zshrc
+
+su - $(logname) -c "npm i -g n"
+echo "export N_PREFIX=$user_home/.npm-global" >> $user_home/.zshrc
