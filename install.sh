@@ -93,7 +93,7 @@ if [ "$vbox" ]; then
 fi
 
 # Update everything
-apt update && sudo apt upgrade -y --fix-missing && sudo apt dist-upgrade -y && sudo apt autoremove -y
+apt update && apt upgrade -y --fix-missing && apt dist-upgrade -y && apt autoremove -y
 
 # Install development basic stuff
 apt install build-essential git -y
