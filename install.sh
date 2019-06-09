@@ -171,3 +171,4 @@ echo "export N_PREFIX=$user_home/.npm-global" >> $user_home/.zshrc
 export N_PREFIX=$user_home/.npm-global
 n lts
 chown $(logname):$(logname) -R $user_home/.npm-global
+chown $(logname):$(logname) -R $user_home/.npm
