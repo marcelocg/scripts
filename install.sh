@@ -162,7 +162,6 @@ apt install -y nodejs
 rm -f $user_home/install_node_12.sh
 
 mkdir $user_home/.npm-global
-chown $(logname):$(logname) $user_home/.npm-global
 npm config set prefix "$user_home/.npm-global"
 echo "export PATH=$user_home/.npm-global/bin:$PATH" >> $user_home/.zshrc
 export PATH=$user_home/.npm-global/bin:$PATH
@@ -171,3 +170,4 @@ npm i -g n
 echo "export N_PREFIX=$user_home/.npm-global" >> $user_home/.zshrc
 export N_PREFIX=$user_home/.npm-global
 n lts
+chown $(logname):$(logname) -R $user_home/.npm-global
