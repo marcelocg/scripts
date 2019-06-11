@@ -156,19 +156,24 @@ snap install --classic code
 
 ## Install Node
 curl -fsSL https://deb.nodesource.com/setup_12.x $curl_proxy -o $user_home/install_node_12.sh
+sed -i "+s+curl -s+curl $curl_proxy -s+" $user_home/install_node_12.sh
 chmod +x $user_home/install_node_12.sh
 bash $user_home/install_node_12.sh
 apt install -y nodejs
 rm -f $user_home/install_node_12.sh
+
+npm config set proxy $proxy_address
+npm config set https-proxy $proxy_address
 
 mkdir $user_home/.npm-global
 npm config set prefix "$user_home/.npm-global"
 echo "export PATH=$user_home/.npm-global/bin:$PATH" >> $user_home/.zshrc
 export PATH=$user_home/.npm-global/bin:$PATH
 
+### Install Node version manager
 npm i -g n
 echo "export N_PREFIX=$user_home/.npm-global" >> $user_home/.zshrc
 export N_PREFIX=$user_home/.npm-global
-n lts
+HTTP_PROXY=$proxy_address HTTPS_PROXY=$proxy_address n lts ## install the LTS version of Node and set it as default
 chown $(logname):$(logname) -R $user_home/.npm-global
 chown $(logname):$(logname) -R $user_home/.npm
