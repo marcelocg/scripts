@@ -170,7 +170,8 @@ npm config set https-proxy $proxy_address
 
 mkdir $user_home/.npm-global
 npm config set prefix "$user_home/.npm-global"
-echo "export PATH=$user_home/.npm-global/bin:$PATH" >> $user_home/.zshrc
+#echo "export PATH=$user_home/.npm-global/bin:$PATH" >> $user_home/.zshrc
+sed -i "s_PATH=_PATH=$user_home/.npm-global/bin:_" $user_home/.zshrc
 export PATH=$user_home/.npm-global/bin:$PATH
 
 ### Install Node version manager
@@ -191,6 +192,6 @@ tar -xf open_jdk_$JAVA_VERSION.tar.gz -C $user_home/java
 rm -f open_jdk_$JAVA_VERSION.tar.gz
 JAVA_HOME=$user_home/java/$(ls $user_home/java)
 echo "export JAVA_HOME=$JAVA_HOME" >> $user_home/.zshrc
-echo "export PATH=$JAVA_HOME/bin:$PATH" >> $user_home/.zshrc
+sed -i "s_PATH=_PATH=$JAVA_HOME/bin:_" $user_home/.zshrc
 export PATH=$JAVA_HOME/bin:$PATH
 chown $(logname):$(logname) -R $user_home/java
