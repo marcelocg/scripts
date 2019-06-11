@@ -2,6 +2,7 @@
 # POSIX
 
 JAVA_VERSION="11"
+NODE_VERSION="12"
 
 die() {
   printf '%s\n' "$1" >&2
@@ -157,12 +158,12 @@ fi
 snap install --classic code
 
 ## Install Node
-curl -fsSL https://deb.nodesource.com/setup_12.x $curl_proxy -o $user_home/install_node_12.sh
-sed -i "+s+curl -s+curl $curl_proxy -s+" $user_home/install_node_12.sh
-chmod +x $user_home/install_node_12.sh
-bash $user_home/install_node_12.sh
+curl -fsSL https://deb.nodesource.com/setup_$NODE_VERSION.x $curl_proxy -o $user_home/install_node_$NODE_VERSION.sh
+sed -i "+s+curl -s+curl $curl_proxy -s+" $user_home/install_node_$NODE_VERSION.sh
+chmod +x $user_home/install_node_$NODE_VERSION.sh
+bash $user_home/install_node_$NODE_VERSION.sh
 apt install -y nodejs
-rm -f $user_home/install_node_12.sh
+rm -f $user_home/install_node_$NODE_VERSION.sh
 
 npm config set proxy $proxy_address
 npm config set https-proxy $proxy_address
@@ -176,7 +177,10 @@ export PATH=$user_home/.npm-global/bin:$PATH
 npm i -g n
 echo "export N_PREFIX=$user_home/.npm-global" >> $user_home/.zshrc
 export N_PREFIX=$user_home/.npm-global
-HTTP_PROXY=$proxy_address HTTPS_PROXY=$proxy_address n lts ## install the LTS version of Node and set it as default
+
+#### Install the LTS version of Node and set it as default
+HTTP_PROXY=$proxy_address HTTPS_PROXY=$proxy_address n lts
+
 chown $(logname):$(logname) -R $user_home/.npm-global
 chown $(logname):$(logname) -R $user_home/.npm
 
