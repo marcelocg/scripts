@@ -1,6 +1,8 @@
 #!/bin/sh
 # POSIX
 
+JAVA_VERSION="11"
+
 die() {
   printf '%s\n' "$1" >&2
   exit 1
@@ -177,3 +179,13 @@ export N_PREFIX=$user_home/.npm-global
 HTTP_PROXY=$proxy_address HTTPS_PROXY=$proxy_address n lts ## install the LTS version of Node and set it as default
 chown $(logname):$(logname) -R $user_home/.npm-global
 chown $(logname):$(logname) -R $user_home/.npm
+
+## Install Java
+mkdir -p $user_home/java
+curl -fL https://api.adoptopenjdk.net/v2/binary/releases/openjdk$JAVA_VERSION?openjdk_impl=hotspot&os=linux&arch=x64&release=latest&type=jdk $curl_proxy -o $user_home/open_jdk_$JAVA_VERSION.tar.gz
+tar -xf open_jdk_$JAVA_VERSION.tar.gz -C $user_home/java
+rm -f open_jdk_$JAVA_VERSION.tar.gz
+echo "export JAVA_HOME=$user_home/java/$(ls $user_home/java)" >> $user_home/.zshrc
+echo "export PATH=$JAVA_HOME/bin:$PATH" >> $user_home/.zshrc
+export PATH=$JAVA_HOME/bin:$PATH"
+chown $(logname):$(logname) -R $user_home/java
