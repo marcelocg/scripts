@@ -170,7 +170,6 @@ npm config set https-proxy $proxy_address
 
 mkdir $user_home/.npm-global
 npm config set prefix "$user_home/.npm-global"
-#echo "export PATH=$user_home/.npm-global/bin:$PATH" >> $user_home/.zshrc
 sed -i "s_PATH=_PATH=$user_home/.npm-global/bin:_" $user_home/.zshrc
 export PATH=$user_home/.npm-global/bin:$PATH
 
