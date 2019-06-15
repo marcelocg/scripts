@@ -1,6 +1,9 @@
 #!/bin/sh
 # POSIX
 
+GIT_USERNAME="Marcelo Goncalves"                     
+GIT_EMAIL="marcelocg@gmail.com"
+
 JAVA_VERSION="11"
 NODE_VERSION="12"
 
@@ -100,6 +103,8 @@ apt update && apt upgrade -y --fix-missing && apt dist-upgrade -y && apt autorem
 
 # Install development basic stuff
 apt install build-essential git -y
+git config --global user.name $GIT_USERNAME
+git config --global user.email $GIT_EMAIL
 
 if [ "$proxy_address" ]; then
   # Proxy for Git
