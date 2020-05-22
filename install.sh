@@ -4,7 +4,7 @@
 GIT_USERNAME="Marcelo Goncalves"                     
 GIT_EMAIL="marcelocg@gmail.com"
 
-JAVA_VERSION="11"
+JAVA_VERSION="14"
 NODE_VERSION="12"
 
 die() {
