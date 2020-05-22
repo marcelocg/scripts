@@ -128,7 +128,7 @@ curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.con
 chown $(logname):$(logname) $user_home/.tmux.conf
 
 # Install tmux plugin manaeger
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm $user_home/.tmux/plugins/tpm
 
 ## Config user default shell
 chsh -s $(which zsh) $(logname)
