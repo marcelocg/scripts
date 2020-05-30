@@ -102,9 +102,15 @@ fi
 apt update && apt upgrade -y --fix-missing && apt dist-upgrade -y && apt autoremove -y
 
 # Install development basic stuff
-apt install build-essential git -y
+apt install build-essential git docker.io -y
+
+# Config git
 git config --global user.name $GIT_USERNAME
 git config --global user.email $GIT_EMAIL
+
+# Config docker
+systemctl enable --now docker
+usermod -aG docker $(logname)
 
 if [ "$proxy_address" ]; then
   # Proxy for Git
