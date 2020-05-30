@@ -121,7 +121,7 @@ fi
 # Terminal
 
 ## Install terminal stuff
-apt install -y tmux zsh silversearcher-ag fonts-powerline fortune
+apt install -y sakura tmux zsh silversearcher-ag fortune
 
 ## Download tmux dotfile
 curl_proxy=
@@ -160,10 +160,11 @@ curl -fL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF
 # update fonts cache
 fc-cache -f -v
 
+# zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $CUSTOM_ZSH_DIR/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $CUSTOM_ZSH_DIR/plugins/zsh-syntax-highlighting
 
-
+# zsh config files
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.zshrc $curl_proxy -o $user_home/.zshrc
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.aliases $curl_proxy -o $user_home/.aliases
 
