@@ -148,11 +148,21 @@ rm -f $user_home/install_oh-my-zsh.sh
 
 CUSTOM_ZSH_DIR="$user_home/.oh-my-zsh/custom"
 
-git clone https://github.com/denysdovhan/spaceship-prompt.git $CUSTOM_ZSH_DIR/themes/spaceship-prompt
+# Powerlevel10k oh-my-zsh theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $CUSTOM_ZSH_DIR/themes/powerlevel10k
+
+# Download Powerlevel10k theme recommended custom fonts
+mkdir -p /usr/local/share/fonts
+curl -fL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf $curl_proxy -o /usr/local/share/fonts/MesloLGSNFRegular.ttf
+curl -fL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf $curl_proxy -o /usr/local/share/fonts/MesloLGSNFBold.ttf
+curl -fL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf $curl_proxy -o /usr/local/share/fonts/MesloLGSNFItalic.ttf
+curl -fL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf $curl_proxy -o /usr/local/share/fonts/MesloLGSNFBoldItalic.ttf
+# update fonts cache
+fc-cache -f -v
+
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $CUSTOM_ZSH_DIR/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $CUSTOM_ZSH_DIR/plugins/zsh-syntax-highlighting
 
-ln -s $CUSTOM_ZSH_DIR/themes/spaceship-prompt/spaceship.zsh-theme $CUSTOM_ZSH_DIR/themes/spaceship.zsh-theme
 
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.zshrc $curl_proxy -o $user_home/.zshrc
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.aliases $curl_proxy -o $user_home/.aliases
