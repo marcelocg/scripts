@@ -5,7 +5,7 @@ GIT_USERNAME="Marcelo Goncalves"
 GIT_EMAIL="marcelocg@gmail.com"
 
 JAVA_VERSION="14"
-NODE_VERSION="12"
+NODE_VERSION="14"
 
 die() {
   printf '%s\n' "$1" >&2
@@ -168,7 +168,7 @@ if [ "$proxy_address" ]; then
 fi
 snap install --classic code
 
-## Install Node
+## Install Node Current
 curl -fsSL https://deb.nodesource.com/setup_$NODE_VERSION.x $curl_proxy -o $user_home/install_node_$NODE_VERSION.sh
 sed -i "+s+curl -s+curl $curl_proxy -s+" $user_home/install_node_$NODE_VERSION.sh
 chmod +x $user_home/install_node_$NODE_VERSION.sh
