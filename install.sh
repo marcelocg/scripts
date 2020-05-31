@@ -118,17 +118,16 @@ if [ "$proxy_address" ]; then
   git config --global https.proxy $proxy_address
 fi
 
-# Terminal
+curl_proxy=
+if [ "$proxy_address" ]; then
+  curl_proxy="-x $proxy_address"
+fi
 
 ## Install terminal stuff
 apt install -y sakura tmux zsh silversearcher-ag fortune
 
-## Download tmux dotfile
-curl_proxy=
-
-if [ "$proxy_address" ]; then
-  curl_proxy="-x $proxy_address"
-fi
+curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.config/sakura/sakura.conf $curl_proxy -o $user_home/.config/sakura/sakura.conf
+chown $(logname):$(logname) $user_home/.config/sakura/sakura.conf
 
 curl -fsSL https://raw.githubusercontent.com/marcelocg/dotfiles/master/.tmux.conf $curl_proxy -o $user_home/.tmux.conf
 chown $(logname):$(logname) $user_home/.tmux.conf
