@@ -25,6 +25,11 @@ if [ ! "$(id -u)" -eq 0 ] ;then
   die "Please run this script with: \$ sudo $0 $*"
 fi
 
+# The 2> is to suppress the logname: no login name error that will log to the console starting
+# with Ubuntu 16.04 due to an upstream gnome-terminal bug.
+# :-${USER} means if $SUDO_USER is blank (for times when sudo is not actually being used), then 
+# substitute the value of $USER.
+# See: https://askubuntu.com/a/849469
 usr=$(logname 2>/dev/null || echo ${SUDO_USER:-${USER}})
 user_home="/home/$usr"
 echo "Installing for user $usr..."
