@@ -25,7 +25,10 @@ if [ ! "$(id -u)" -eq 0 ] ;then
   die "Please run this script with: \$ sudo $0 $*"
 fi
 
-user_home="/home/$(logname)"
+usr=$(logname 2>/dev/null || echo ${SUDO_USER:-${USER}})
+user_home="/home/$usr"
+echo "Installing for user $usr..."
+
 proxy_ip=
 proxy_port="3128"
 vbox=
