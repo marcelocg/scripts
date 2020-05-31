@@ -208,8 +208,8 @@ chown $(logname):$(logname) -R $user_home/.npm
 ## Install Java
 mkdir -p $user_home/java
 curl -fL "https://api.adoptopenjdk.net/v2/binary/releases/openjdk$JAVA_VERSION?openjdk_impl=hotspot&os=linux&arch=x64&release=latest&type=jdk" $curl_proxy -o $user_home/open_jdk_$JAVA_VERSION.tar.gz
-tar -xf open_jdk_$JAVA_VERSION.tar.gz -C $user_home/java
-rm -f open_jdk_$JAVA_VERSION.tar.gz
+tar -xf $user_home/open_jdk_$JAVA_VERSION.tar.gz -C $user_home/java
+rm -f $user_home/open_jdk_$JAVA_VERSION.tar.gz
 JAVA_HOME=$user_home/java/$(ls $user_home/java)
 echo "export JAVA_HOME=$JAVA_HOME" >> $user_home/.zshrc
 sed -i "s_PATH=_PATH=$JAVA_HOME/bin:_" $user_home/.zshrc
